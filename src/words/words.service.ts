@@ -12,7 +12,9 @@ export class WordsService {
   ) {}
 
   async getAllWords() {
-    return await this.wordsRepository.find();
+    const [words, count] = await this.wordsRepository.findAndCount();
+    console.log(count);
+    return words;
   }
 
   async addNewWord(newWordDto: newWordDto) {
@@ -22,6 +24,8 @@ export class WordsService {
       length: length,
       hasRepeatedCharacters: newWordDto.hasRepeatedCharacter,
     };
-    return await this.wordsRepository.create(newWord);
+    const addedWord = await this.wordsRepository.create(newWord);
+    await this.wordsRepository.save(addedWord);
+    return addedWord;
   }
 }

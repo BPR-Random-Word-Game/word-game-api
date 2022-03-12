@@ -1,5 +1,5 @@
 /* eslint-disable prettier/prettier */
-export default class NewWordDto {
-    word: string;
+export default class RequestWordDto {
+    length: number;
     hasRepeatedCharacters: boolean;
   }

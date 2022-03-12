@@ -1,5 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import newWordDto from './dto/newWord.dto';
+import NewWordDto from './dto/newWord.dto';
+import RequestWordDto from './dto/requestWord.dto';
 import { WordsService } from './words.service';
 
 @Controller('words')
@@ -11,8 +12,13 @@ export class WordsController {
     return this.wordsService.getAllWords();
   }
 
+  @Post('requestword')
+  getWordByLength(@Body() requestWordDto: RequestWordDto) {
+    return this.wordsService.findAWordByLength(requestWordDto);
+  }
+
   @Post()
-  addNewWord(@Body() newWord: newWordDto) {
+  addNewWord(@Body() newWord: NewWordDto) {
     return this.wordsService.addNewWord(newWord);
   }
 }
